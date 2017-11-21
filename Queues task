@@ -1,0 +1,53 @@
+Dim output As Char
+    Dim StartPos As Integer
+    Dim item As Char
+    Dim EndPos As Integer
+    Sub dequeue(theQueue() As Char, ByRef StartPos As Integer)
+        item = LCase(theQueue(StartPos))
+        output = item
+        StartPos = StartPos + 1
+        Console.WriteLine(output)
+    End Sub
+
+    Sub Main()
+        Dim count As Integer
+        Dim Userinput As Char
+        Dim theQueue(10) As Char
+        Dim StartPos As Integer
+        Dim EndPos As Integer
+        StartPos = 0
+        EndPos = -1
+
+        Do
+            Console.WriteLine("enter a letter : ")
+            Userinput = Console.ReadLine()
+            Call enqueue(theQueue, Userinput, EndPos)
+
+            count = count + 1
+
+            If count >= 5 Then
+                Call dequeue(theQueue, StartPos)
+            End If
+
+
+        Loop Until QueueEmpty() Or (Userinput = "*")
+
+
+
+    End Sub
+
+    Function QueueEmpty() As Boolean
+        Dim returnvalue As Boolean
+        If StartPos = EndPos + 1 Then
+            returnvalue = True
+        Else returnvalue = False
+        End If
+        Return returnvalue
+    End Function
+
+
+    Sub enqueue(ByRef theQueue() As Char, ByRef Userinput As Char, ByRef EndPos As Integer)
+
+        EndPos = EndPos + 1
+        theQueue(EndPos) = Userinput
+    End Sub
